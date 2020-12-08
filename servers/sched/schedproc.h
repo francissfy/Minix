@@ -4,6 +4,7 @@
 #include <limits.h>
 
 #include <minix/bitmap.h>
+#include <time.h>
 
 /* EXTERN should be extern except in main.c, where we want to keep the struct */
 #ifdef _MAIN
@@ -33,6 +34,10 @@ EXTERN struct schedproc {
 	bitchunk_t cpu_mask[BITMAP_CHUNKS(CONFIG_MAX_CPUS)]; /* what CPUs is hte
 								process allowed
 								to run on */
+	/* lottery scheduling */
+	unsigned lottery_num;
+	/* edf scheduling */
+	clock_t deadline;
 } schedproc[NR_PROCS];
 
 /* Flag values */

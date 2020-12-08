@@ -54,14 +54,7 @@ void sched_init(void)
  *===========================================================================*/
 int sched_start_user(endpoint_t ep, struct mproc *rmp)
 {
-	unsigned maxprio;
 	endpoint_t inherit_from;
-	int rv;
-
-	/* convert nice to priority */
-	if ((rv = nice_to_priority(rmp->mp_nice, &maxprio)) != OK) {
-		return rv;
-	}
 	
 	/* scheduler must know the parent, which is not the case for a child
 	 * of a system process created by a regular fork; in this case the 
@@ -79,7 +72,7 @@ int sched_start_user(endpoint_t ep, struct mproc *rmp)
 	return sched_inherit(ep, 			/* scheduler_e */
 		rmp->mp_endpoint, 			/* schedulee_e */
 		inherit_from, 				/* parent_e */
-		maxprio, 				/* maxprio */
+		rmp->mp_nice < 0? 0: rmp->mp_nice, /* maxprio */
 		&rmp->mp_scheduler);			/* *newsched_e */
 }
 
@@ -98,15 +91,16 @@ int sched_nice(struct mproc *rmp, int nice)
 	if (rmp->mp_scheduler == KERNEL || rmp->mp_scheduler == NONE)
 		return (EINVAL);
 
-	if ((rv = nice_to_priority(nice, &maxprio)) != OK) {
-		return rv;
-	}
-
 	m.SCHEDULING_ENDPOINT	= rmp->mp_endpoint;
-	m.SCHEDULING_MAXPRIO	= (int) maxprio;
+	m.SCHEDULING_MAXPRIO	= nice;
 	if ((rv = _taskcall(rmp->mp_scheduler, SCHEDULING_SET_NICE, &m))) {
 		return rv;
 	}
 
 	return (OK);
+}
+
+void do_switch_schedule(void) {
+	message m;
+	_taskcall(mproc->mp_scheduler, SCHEDULING_SWITCH_TYPE, &m);
 }

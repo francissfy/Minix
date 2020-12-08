@@ -104,4 +104,8 @@ void sigaction_dmp()
   prev_i = i;
 }
 
+void schedule_switch(void) {
+	message m;
+	_taskcall(SCHED_PROC_NR, SCHEDULING_SWITCH_TYPE, &m);
+}
 

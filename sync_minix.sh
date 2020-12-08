@@ -1,0 +1,1 @@
+rsync -a --files-from=./rsync_list ./ minix:/usr/src

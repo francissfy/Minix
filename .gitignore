@@ -41,3 +41,6 @@ releasetools/revision
 share/zoneinfo/builddir
 lib/libc/compat__*
 .gdbinit
+# newly added
+.DS_Store
+.vscode

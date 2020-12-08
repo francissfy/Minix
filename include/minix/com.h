@@ -1162,6 +1162,7 @@
 
 /* SCHEDULING_INHERIT is like SCHEDULING_START, but without _QUANTUM field */
 #define SCHEDULING_INHERIT	(SCHEDULING_BASE+5)
+#define SCHEDULING_SWITCH_TYPE (SCHEDULING_BASE+6)
 
 /*===========================================================================*
  *              Messages for USB                                             *

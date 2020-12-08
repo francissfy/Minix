@@ -1,0 +1,1 @@
+rsync -a --files-from=./scheduler_sync_file ./ minix:/root

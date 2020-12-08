@@ -87,6 +87,10 @@ int main(void)
 				result = EPERM;
 			}
 			break;
+		case SCHEDULING_SWITCH_TYPE:
+			switch_schedule_type();
+			result = OK;
+			break;
 		default:
 			result = no_sys(who_e, call_nr);
 		}

@@ -22,6 +22,7 @@ void kenv_dmp(void);
 /* dmp_pm.c */
 void mproc_dmp(void);
 void sigaction_dmp(void);
+void schedule_switch(void);
 
 /* dmp_fs.c */
 void dtab_dmp(void);

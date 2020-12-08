@@ -30,6 +30,7 @@ struct hook_entry {
 	{ SF4,	dtab_dmp, "Device/Driver mapping" },
 	{ SF5,	mapping_dmp, "Print key mappings" },
 	{ SF6,	rproc_dmp, "Reincarnation server process table" },
+  { SF7,  schedule_switch, "Swtch the schedule type"},
 	{ SF8,  data_store_dmp, "Data store contents" },
 	{ SF9,  procstack_dmp, "Processes with stack traces" },
 };

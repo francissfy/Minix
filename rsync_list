@@ -1,0 +1,10 @@
+include/minix/com.h
+servers/is/dmp.c
+servers/is/dmp_pm.c
+servers/is/proto.h
+servers/pm/proto.h
+servers/pm/schedule.c
+servers/sched/main.c
+servers/sched/proto.h
+servers/sched/schedproc.h
+servers/sched/schedule.c
