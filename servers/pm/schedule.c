@@ -54,8 +54,8 @@ void sched_init(void)
  *===========================================================================*/
 int sched_start_user(endpoint_t ep, struct mproc *rmp)
 {
-	endpoint_t inherit_from;
-	
+	endpoint_t inherit_from;	
+
 	/* scheduler must know the parent, which is not the case for a child
 	 * of a system process created by a regular fork; in this case the 
 	 * scheduler should inherit settings from init rather than the real 
@@ -70,9 +70,9 @@ int sched_start_user(endpoint_t ep, struct mproc *rmp)
 	
 	/* inherit quantum */
 	return sched_inherit(ep, 			/* scheduler_e */
-		rmp->mp_endpoint, 			/* schedulee_e */
-		inherit_from, 				/* parent_e */
-		rmp->mp_nice < 0? 0: rmp->mp_nice, /* maxprio */
+		rmp->mp_endpoint, 				/* schedulee_e */
+		inherit_from, 					/* parent_e */
+		MIN_USER_Q, 					/* maxprio */
 		&rmp->mp_scheduler);			/* *newsched_e */
 }
 
@@ -98,9 +98,4 @@ int sched_nice(struct mproc *rmp, int nice)
 	}
 
 	return (OK);
-}
-
-void do_switch_schedule(void) {
-	message m;
-	_taskcall(mproc->mp_scheduler, SCHEDULING_SWITCH_TYPE, &m);
 }

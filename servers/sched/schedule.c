@@ -404,7 +404,7 @@ int do_nice(message *m_ptr)
 		} else {
 			rmp->deadline = edf_clock + (double)sys_hz()/1000.0f*(double)nice;
 		}
-		printf("INFO: do_nice: set deadline: %d, endpoint: %d\n", nice, rmp->endpoint);
+		printf("INFO: do_nice: set deadline: %d, endpoint: %d\n", (int)rmp->deadline, rmp->endpoint);
 		return OK;
 	default:
 		assert(0);
